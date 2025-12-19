@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/sidebar";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { HandPlatter } from "lucide-react";
+import { Car, HandPlatter } from "lucide-react";
 
 // This is sample data.
 const data = {
@@ -54,7 +54,7 @@ export function UserAppSideBar({
             <SidebarMenuButton size="lg" asChild>
               <a href="#">
                 <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-                  <HandPlatter className="size-6"></HandPlatter>
+                  <Car className="size-6"></Car>
                 </div>
                 <div className="flex flex-col gap-0.5 leading-none">
                   <span className="font-medium">CRX</span>
