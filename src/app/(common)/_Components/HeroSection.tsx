@@ -15,7 +15,7 @@ export function HeroSection({ onSearchClick }: HeroSectionProps) {
   const [rentalDate, setRentalDate] = useState("");
 
   return (
-    <div className="relative h-[700px] w-full overflow-hidden bg-black">
+    <div className="relative h-[1000px] w-full overflow-hidden bg-black">
       {/* Background Image */}
       <div className="absolute inset-0">
         <div
@@ -71,55 +71,6 @@ export function HeroSection({ onSearchClick }: HeroSectionProps) {
               </p>
             </div>
 
-            {/* Enhanced Search Bar */}
-            <div className="mt-12 bg-white/10 backdrop-blur-xl p-8 rounded border border-white/20 animate-slide-up-delayed">
-              <div className="flex flex-col lg:flex-row gap-6">
-                <div className="flex-1 group">
-                  <label className="block text-xs text-gray-400 mb-3 uppercase tracking-widest">
-                    Location
-                  </label>
-                  <div className="flex items-center gap-3 px-4 py-4 bg-white/5 border border-white/10 rounded group-hover:bg-white/10 group-hover:border-white/20 transition-all">
-                    <MapPin className="size-5 text-gray-400" />
-                    <input
-                      type="text"
-                      placeholder="Enter your location"
-                      value={pickupLocation}
-                      onChange={(e) => setPickupLocation(e.target.value)}
-                      className="flex-1 bg-transparent border-none outline-none text-white placeholder:text-gray-500"
-                    />
-                  </div>
-                </div>
-
-                <div className="flex-1 group">
-                  <label className="block text-xs text-gray-400 mb-3 uppercase tracking-widest">
-                    Rental Period
-                  </label>
-                  <div className="flex items-center gap-3 px-4 py-4 bg-white/5 border border-white/10 rounded group-hover:bg-white/10 group-hover:border-white/20 transition-all">
-                    <Calendar className="size-5 text-gray-400" />
-                    <input
-                      type="text"
-                      placeholder="Select dates"
-                      value={rentalDate}
-                      onChange={(e) => setRentalDate(e.target.value)}
-                      className="flex-1 bg-transparent border-none outline-none text-white placeholder:text-gray-500"
-                    />
-                  </div>
-                </div>
-
-                <div className="lg:self-end">
-                  <Button
-                    size="lg"
-                    className="w-full lg:w-auto bg-white text-black hover:bg-gray-200 transition-all duration-300 px-10 py-7 rounded uppercase tracking-widest text-sm"
-                    onClick={onSearchClick}
-                  >
-                    <Search className="size-5 mr-2" />
-                    Search
-                  </Button>
-                </div>
-              </div>
-            </div>
-
-            {/* Enhanced Stats */}
             <div className="flex flex-wrap gap-12 pt-6 animate-fade-in-up">
               <div className="group cursor-default">
                 <div className="text-5xl md:text-6xl text-white mb-2 group-hover:scale-110 transition-transform tracking-tighter">

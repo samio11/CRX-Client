@@ -1,8 +1,5 @@
 "use client";
-import { Button } from "@/components/ui/button";
-
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-
 import {
   Fuel,
   Users,
@@ -12,17 +9,18 @@ import {
   Heart,
   ArrowRight,
   Star,
-  Badge,
 } from "lucide-react";
 import { useState } from "react";
 import { Car } from "./types/car";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 interface CarCardProps {
   car: Car;
 }
 
 export function CarCard({ car }: CarCardProps) {
-  const [isFavorite, setIsFavorite] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
   const getFuelIcon = (fuelType: string) => {
@@ -61,17 +59,6 @@ export function CarCard({ car }: CarCardProps) {
           <Badge className="bg-black/80 backdrop-blur-sm text-white border-0 uppercase tracking-widest text-xs">
             {car.category}
           </Badge>
-
-          <button
-            onClick={() => setIsFavorite(!isFavorite)}
-            className={`p-2 rounded-full backdrop-blur-md transition-all duration-300 ${
-              isFavorite
-                ? "bg-black text-white scale-110"
-                : "bg-white/90 text-black hover:bg-white hover:scale-110"
-            }`}
-          >
-            <Heart className={`size-4 ${isFavorite ? "fill-current" : ""}`} />
-          </button>
         </div>
 
         {/* Availability Badge */}
@@ -177,6 +164,7 @@ export function CarCard({ car }: CarCardProps) {
             {car.features.slice(0, 3).map((feature: any, index: any) => (
               <Badge
                 key={index}
+                variant="secondary"
                 className="text-xs bg-gray-100 hover:bg-black hover:text-white transition-colors border border-gray-200 uppercase tracking-wider"
               >
                 {feature}
@@ -200,7 +188,7 @@ export function CarCard({ car }: CarCardProps) {
           variant="outline"
           className="px-6 border-2 border-black hover:bg-black hover:text-white transition-all duration-300 uppercase tracking-widest text-xs"
         >
-          Details
+          <Link href={`/cars/${car._id}`}>Details</Link>
         </Button>
       </CardFooter>
     </Card>

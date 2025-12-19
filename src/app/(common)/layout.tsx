@@ -7,5 +7,12 @@ export default function CommonLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <div>{children}</div>;
+  return (
+    <div>
+      <Header></Header>
+
+      <div className="flex flex-col min-h-[517px]"> {children}</div>
+      <Footer></Footer>
+    </div>
+  );
 }

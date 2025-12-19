@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-
 import { ArrowUp } from "lucide-react";
 import { Car } from "./_Components/types/car";
 import { toast, Toaster } from "sonner";
@@ -14,6 +13,7 @@ import { CarCard } from "./_Components/CarCard";
 import { Button } from "@/components/ui/button";
 import { Testimonials } from "./_Components/Testimonials";
 import { Footer } from "./_Components/Footer";
+import { getAllCar } from "@/services/cars";
 
 // Sample data from the API response
 const sampleCars: Car[] = [
@@ -37,102 +37,6 @@ const sampleCars: Car[] = [
     createdAt: "2025-12-18T19:04:22.112Z",
     updatedAt: "2025-12-18T19:04:22.112Z",
   },
-  {
-    _id: "69444fc506062a206341f660",
-    name: "BMW 5 Series",
-    brand: "BMW",
-    model: "530i",
-    year: 2023,
-    color: "Black",
-    category: "luxury",
-    fuelType: "petrol",
-    seats: 5,
-    features: ["Leather Seats", "Sunroof", "Navigation"],
-    image:
-      "https://res.cloudinary.com/dzrsna1zx/image/upload/v1766084549/vjcy3toyt6-1766084548085-images.jfif.jpg",
-    mileage: 12,
-    isAvailable: true,
-    location: "Banani",
-    isDeleted: false,
-    createdAt: "2025-12-18T19:02:29.485Z",
-    updatedAt: "2025-12-18T19:02:29.485Z",
-  },
-  {
-    _id: "69444fc506062a206341f661",
-    name: "Mercedes-Benz S-Class",
-    brand: "Mercedes-Benz",
-    model: "S500",
-    year: 2024,
-    color: "Silver",
-    category: "luxury",
-    fuelType: "hybrid",
-    seats: 5,
-    features: ["Massage Seats", "Panoramic Roof", "Ambient Lighting"],
-    image: "https://images.unsplash.com/photo-1617531653332-bd46c24f2068?w=800",
-    mileage: 5,
-    isAvailable: true,
-    location: "Gulshan",
-    isDeleted: false,
-    createdAt: "2025-12-18T19:02:29.485Z",
-    updatedAt: "2025-12-18T19:02:29.485Z",
-  },
-  {
-    _id: "69444fc506062a206341f662",
-    name: "Porsche 911",
-    brand: "Porsche",
-    model: "911 Carrera",
-    year: 2024,
-    color: "Red",
-    category: "sports",
-    fuelType: "petrol",
-    seats: 4,
-    features: ["Sport Exhaust", "Sport Chrono", "PASM"],
-    image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800",
-    mileage: 8,
-    isAvailable: true,
-    location: "Banani",
-    isDeleted: false,
-    createdAt: "2025-12-18T19:02:29.485Z",
-    updatedAt: "2025-12-18T19:02:29.485Z",
-  },
-  {
-    _id: "69444fc506062a206341f663",
-    name: "Audi e-tron GT",
-    brand: "Audi",
-    model: "e-tron GT",
-    year: 2024,
-    color: "Blue",
-    category: "electric",
-    fuelType: "electric",
-    seats: 5,
-    features: ["Matrix LED", "Virtual Cockpit", "Air Suspension"],
-    image: "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=800",
-    mileage: 0,
-    isAvailable: true,
-    location: "Dhanmondi",
-    isDeleted: false,
-    createdAt: "2025-12-18T19:02:29.485Z",
-    updatedAt: "2025-12-18T19:02:29.485Z",
-  },
-  {
-    _id: "69444fc506062a206341f664",
-    name: "Range Rover Sport",
-    brand: "Land Rover",
-    model: "Sport",
-    year: 2023,
-    color: "Gray",
-    category: "suv",
-    fuelType: "diesel",
-    seats: 7,
-    features: ["Terrain Response", "Meridian Audio", "Adaptive Cruise"],
-    image: "https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=800",
-    mileage: 15,
-    isAvailable: false,
-    location: "Uttara",
-    isDeleted: false,
-    createdAt: "2025-12-18T19:02:29.485Z",
-    updatedAt: "2025-12-18T19:02:29.485Z",
-  },
 ];
 
 export default function App() {
@@ -140,14 +44,29 @@ export default function App() {
   const [filteredCars, setFilteredCars] = useState<Car[]>(sampleCars);
   const [isLoading, setIsLoading] = useState(true);
   const [showScrollTop, setShowScrollTop] = useState(false);
-
   useEffect(() => {
-    // Simulate loading
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
+    const fetchCars = async () => {
+      try {
+        setIsLoading(true);
 
-    // Scroll to top button
+        const res = await getAllCar();
+
+        // assuming backend response shape: { data: Car[] }
+        const carsData: Car[] = res?.data?.result || [];
+
+        setCars(carsData);
+        setFilteredCars(carsData);
+      } catch (error) {
+        console.error(error);
+        toast.error("Failed to load cars");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchCars();
+
+    // Scroll to top button logic (unchanged)
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 400);
     };
@@ -166,7 +85,6 @@ export default function App() {
   const handleFilterChange = (filters: FilterValues) => {
     let filtered = [...cars];
 
-    // Search filter
     if (filters.search) {
       filtered = filtered.filter(
         (car) =>
@@ -175,17 +93,14 @@ export default function App() {
       );
     }
 
-    // Category filter
     if (filters.category && filters.category !== "all") {
       filtered = filtered.filter((car) => car.category === filters.category);
     }
 
-    // Fuel type filter
     if (filters.fuelType && filters.fuelType !== "all") {
       filtered = filtered.filter((car) => car.fuelType === filters.fuelType);
     }
 
-    // Location filter
     if (filters.location && filters.location !== "all") {
       filtered = filtered.filter((car) => car.location === filters.location);
     }
@@ -203,25 +118,18 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header />
-
-      {/* Hero Section */}
       <HeroSection onSearchClick={handleSearchClick} />
 
-      {/* Featured Cars */}
       <FeaturedCars cars={cars} />
 
-      {/* How It Works */}
       <HowItWorks />
 
-      {/* Main Content */}
       <main className="container mx-auto px-4 py-20 space-y-16">
         {/* Filters Section */}
         <div className="animate-fade-in">
           <Filters onFilterChange={handleFilterChange} />
         </div>
 
-        {/* Cars Section */}
         <section id="cars" className="scroll-mt-20">
           <div className="flex items-center justify-between mb-12">
             <div>
@@ -386,11 +294,6 @@ export default function App() {
         </section>
       </main>
 
-      {/* Testimonials */}
-      <Testimonials />
-
-      <Footer />
-
       {/* Scroll to Top Button */}
       {showScrollTop && (
         <Button
@@ -401,8 +304,6 @@ export default function App() {
           <ArrowUp className="size-6" />
         </Button>
       )}
-
-      {/* <Toaster position="top-right" richColors /> */}
     </div>
   );
 }

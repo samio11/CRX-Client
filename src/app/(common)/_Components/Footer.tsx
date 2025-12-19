@@ -24,9 +24,7 @@ export function Footer() {
                 <Car className="size-6 text-black" />
               </div>
               <div>
-                <span className="text-2xl text-white tracking-tight">
-                  DRIVEELITE
-                </span>
+                <span className="text-2xl text-white tracking-tight">CARX</span>
                 <div className="text-xs tracking-widest uppercase">
                   Premium Rentals
                 </div>
@@ -171,16 +169,16 @@ export function Footer() {
               <li className="flex items-start gap-3">
                 <MapPin className="size-5 mt-0.5 flex-shrink-0" />
                 <span className="text-sm">
-                  123 Business District, Dhaka 1212, Bangladesh
+                  Nikunja-02, Dhaka 1212, Bangladesh
                 </span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="size-5 flex-shrink-0" />
-                <span className="text-sm">+880 1234-567890</span>
+                <span className="text-sm">+880 1709801305</span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="size-5 flex-shrink-0" />
-                <span className="text-sm">info@driveelite.com</span>
+                <span className="text-sm">info@carx.com</span>
               </li>
             </ul>
           </div>
