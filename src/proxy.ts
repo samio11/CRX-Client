@@ -4,7 +4,7 @@ import { getCurrentUser } from "./services/user";
 const authRoutes = ["/login", "/register"];
 const roleBaseRoutes = {
   admin: [/^\/admin/],
-  student: [/^\/user/],
+  user: [/^\/user/],
 };
 type TRole = keyof typeof roleBaseRoutes;
 export async function proxy(request: NextRequest) {

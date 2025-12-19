@@ -179,16 +179,11 @@ export function CarCard({ car }: CarCardProps) {
           className="flex-1 bg-black hover:bg-gray-800 text-white transition-all duration-300 group/btn uppercase tracking-widest text-xs"
           disabled={!car.isAvailable}
         >
+          <Link href={`/cars/${car._id}`}>Details</Link>
           {car.isAvailable ? "Reserve" : "Unavailable"}
           {car.isAvailable && (
             <ArrowRight className="size-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
           )}
-        </Button>
-        <Button
-          variant="outline"
-          className="px-6 border-2 border-black hover:bg-black hover:text-white transition-all duration-300 uppercase tracking-widest text-xs"
-        >
-          <Link href={`/cars/${car._id}`}>Details</Link>
         </Button>
       </CardFooter>
     </Card>
