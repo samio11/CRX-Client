@@ -565,7 +565,10 @@ export default function ManageCar() {
                             size="sm"
                             variant="ghost"
                             onClick={() =>
-                              handleToggleAvailability(car._id, car.isAvailable)
+                              handleToggleAvailability(
+                                car._id,
+                                !car.isAvailable
+                              )
                             }
                           >
                             {car.isAvailable ? (
