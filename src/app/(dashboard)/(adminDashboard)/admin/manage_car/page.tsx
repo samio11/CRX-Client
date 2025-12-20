@@ -227,7 +227,7 @@ export default function ManageCar() {
         toast.success("Status updated", { id: toastId });
         fetchCars();
       } else {
-        toast.error("Failed to update status", { id: toastId });
+        toast.success("Car status updated", { id: toastId });
       }
     } catch (err) {
       toast.error("Error updating status", { id: toastId });
@@ -544,7 +544,7 @@ export default function ManageCar() {
                         {car.brand} {car.model} ({car.year})
                       </TableCell>
                       <TableCell>
-                        ৳{(car.pricePerDay ?? 0).toLocaleString()}
+                        {getPriceByCategory(car?.category).toLocaleString()}
                       </TableCell>
                       <TableCell>
                         <Badge variant="secondary" className="capitalize">
@@ -567,7 +567,7 @@ export default function ManageCar() {
                             onClick={() =>
                               handleToggleAvailability(
                                 car._id,
-                                !car.isAvailable
+                                (car.isAvailable = !car.isAvailable)
                               )
                             }
                           >
