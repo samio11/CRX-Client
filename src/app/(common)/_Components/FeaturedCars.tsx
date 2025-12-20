@@ -1,6 +1,7 @@
 import { ArrowRight, Star } from "lucide-react";
 import { Car } from "./types/car";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 interface FeaturedCarsProps {
   cars: Car[];
@@ -80,7 +81,7 @@ export function FeaturedCars({ cars }: FeaturedCarsProps) {
                     </div>
                   </div>
                   <Button className="bg-black hover:bg-gray-800 group-hover:scale-110 transition-all uppercase tracking-widest text-xs">
-                    Reserve
+                    <Link href={`/cars/${car._id}`}> Reserve</Link>
                     <ArrowRight className="size-4 ml-2" />
                   </Button>
                 </div>

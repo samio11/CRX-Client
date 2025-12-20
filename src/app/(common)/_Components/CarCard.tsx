@@ -180,10 +180,10 @@ export function CarCard({ car }: CarCardProps) {
           disabled={!car.isAvailable}
         >
           <Link href={`/cars/${car._id}`}>Details</Link>
-          {car.isAvailable ? "Reserve" : "Unavailable"}
+          {/* {car.isAvailable ? "Reserve" : "Unavailable"}
           {car.isAvailable && (
             <ArrowRight className="size-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
-          )}
+          )} */}
         </Button>
       </CardFooter>
     </Card>
