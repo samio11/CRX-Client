@@ -41,6 +41,22 @@ export const getBookingByUser = async () => {
     throw err;
   }
 };
+export const getBookingByAdmin = async () => {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/booking`, {
+      method: "GET",
+      headers: {
+        Authorization: (await cookies()).get("accessToken")!.value,
+      },
+    });
+
+    const result = await res.json();
+    return result;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};
 export const completeBooking = async (bookingId: string) => {
   try {
     const res = await fetch(
