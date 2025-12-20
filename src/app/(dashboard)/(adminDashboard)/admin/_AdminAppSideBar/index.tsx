@@ -34,8 +34,12 @@ const data = {
           url: "/admin/manage_user",
         },
         {
-          title: "Manage Mess",
+          title: "Manage Booking",
           url: "/admin/manage_booking",
+        },
+        {
+          title: "Manage Car",
+          url: "/admin/manage_car",
         },
       ],
     },
